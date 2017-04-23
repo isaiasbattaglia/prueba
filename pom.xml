@@ -11,7 +11,7 @@
   <properties>
     <activejdbc.version>1.4.13.j7</activejdbc.version>
     <environments>development.test,development</environments>
-    <project.basedir>/Users/franco/unrc/Materias/Disenio/2017/trivia-app</project.basedir>
+    <project.basedir>/home/isaiasb/Escritorio/pregunta2</project.basedir>
   </properties>
 
   <build>

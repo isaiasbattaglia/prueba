@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 public class UserTest{
     @Before
     public void before(){
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/trivia_test", "franco", "franco");
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/trivia_test", "root", "root");
         System.out.println("UserTest setup");
         Base.openTransaction();
     }
@@ -24,23 +24,27 @@ public class UserTest{
         Base.close();
     }
 
-    // @Test
-    // public void validateUniquenessOfUsernames(){
-    //     User user = new User();
-    //     user.set("username", "anakin");
-    //     user.saveIt();
+     /*@Test
+     public void validateUniquenessOfUsernames(){
+         User user = new User();
+         user.set("username", "anakin");
+         user.saveIt();
+         assertEquals(user.isValid(), false);
 
-    //     User user2 = new User();
-    //     user.set("username", "anakin");
+         User user2 = new User();
+         user.set("username", "anakin");
+         user2.saveIt();
 
-    //     assertEquals(user2.isValid(), false);
-    // }
+         assertEquals(user2.isValid(), false);
+     }*/
+
 
     @Test
     public void validateUniquenessOfUsernames(){
+
         User user = new User();
         user.set("username", "");
-
         assertEquals(user.isValid(), false);
     }
 }
+
