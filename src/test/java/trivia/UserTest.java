@@ -8,6 +8,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+
 
 public class UserTest{
     @Before
@@ -24,27 +27,36 @@ public class UserTest{
         Base.close();
     }
 
-     /*@Test
+     @Test
      public void validateUniquenessOfUsernames(){
          User user = new User();
          user.set("username", "anakin");
          user.saveIt();
-         assertEquals(user.isValid(), false);
-
          User user2 = new User();
          user.set("username", "anakin");
-         user2.saveIt();
-
          assertEquals(user2.isValid(), false);
-     }*/
+     }
 
+     @Test
+     public void validateUniquenessOfEmail(){
+         User user = new User();
+         user.set("username", "hola");
+         user.set("email", "hola@gmail.com");
+         user.saveIt();
+         User user2 = new User();
+         user2.set("username", "hola2");
+         user2.set("email", "hola@gmail.com");
+         assertEquals(user2.get("email")!=user.get("email"), false);
+     }
 
-    @Test
-    public void validateUniquenessOfUsernames(){
-
-        User user = new User();
-        user.set("username", "");
-        assertEquals(user.isValid(), false);
-    }
+     @Test
+     public void validatePositiveAmountOfLives(){
+         User user = new User();
+         user.set("username", "pepe");
+         user.set("lives", -3);
+         user.saveIt();
+         assertFalse( ((Integer)user.get("lives"))>=0);
+         //assertEquals(user2.get("email")!=user.get("email"), false);
+     }
 }
 
