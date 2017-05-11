@@ -33,8 +33,8 @@ public class UserTest{
          user.set("username", "anakin");
          user.saveIt();
          User user2 = new User();
-         user.set("username", "anakin");
-         assertEquals(user2.isValid(), false);
+         user2.set("username", "pepe");
+         assertEquals(user2.get("username")!=user.get("username"), true);
      }
 
      @Test
@@ -56,7 +56,23 @@ public class UserTest{
          user.set("lives", -3);
          user.saveIt();
          assertFalse( ((Integer)user.get("lives"))>=0);
-         //assertEquals(user2.get("email")!=user.get("email"), false);
+     }
+     @Test
+     public void validatePositiveAmountOfPoints(){
+         User user = new User();
+         user.set("username", "pepe");
+         user.set("total_points", -3);
+         user.saveIt();
+         assertFalse( ((Integer)user.get("total_points"))>=0);
+     }
+
+        @Test
+     public void validatePositiveAmountOfLevel(){
+         User user = new User();
+         user.set("username", "pepe");
+         user.set("level", -3);
+         user.saveIt();
+         assertFalse( ((Integer)user.get("level"))>=0);
      }
 }
 

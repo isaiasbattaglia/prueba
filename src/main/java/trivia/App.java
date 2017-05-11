@@ -16,7 +16,9 @@ public class App
       u.set("username", "Maradona");
       u.set("password", "messi");
       u.saveIt();
-
+      
+      User u2 = new User("juan","pepe@gmail.com","1234");
+      u2.saveIt();
       Base.close();
     }
 }
