@@ -53,6 +53,8 @@
                 <artifactId>mysql-connector-java</artifactId>
                 <version>5.1.6</version>
             </dependency>
+
+
         </dependencies>
       </plugin>
 
@@ -106,6 +108,13 @@
       <artifactId>mysql-connector-java</artifactId>
       <version>5.1.6</version>
     </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>1.6.1</version>
+    </dependency>
   </dependencies>
+
+  
 
 </project>
