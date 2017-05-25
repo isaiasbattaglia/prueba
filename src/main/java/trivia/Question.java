@@ -30,6 +30,17 @@ public class Question extends Model {
     System.out.println(this.get("answer2"));
     System.out.println(this.get("answer3"));
     System.out.println(this.get("answer4"));
+  }
 
+
+  public void showQuestion(){
+    Category cat = this.parent(Category.class);
+    System.out.println((String)cat.get("tCategory"));
+    System.out.println((String)this.get("description"));
+    showRandomAnswer();
+  }
+
+  public boolean validateAnswer(Integer numberOfAnswer){
+    return numberOfAnswer==1;
   }
 }

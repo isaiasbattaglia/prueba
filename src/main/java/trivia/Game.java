@@ -32,25 +32,24 @@ public class Game extends Model {
   *Metodo que permite jugar en una partida hasta que se responda mal, o se alcance el maximo de rondas permitidas
   **/
   public void play(){
-    if(!(this.get("state").equals("finalizado"))){
+    User user = this.parent(User.class);
+    if(!(this.get("state").equals("finalizado")) && (Integer)user.get("lives")>0){
+      user.set("lives",(Integer)user.get("lives")-1).saveIt();
       boolean valid = true;
       while(valid && (Integer)this.get("round")<20){ 
         Category category = getRandomCategory();
+        this.add(category);
         Question question = category.getQuestion();
-        waitAnswer(question,category);
-        //valid = question.answer(v);
-        this.set("round",(Integer)this.get("round")+10).saveIt();
+        //question.add(user);
+        valid = user.answerQuestion(question);
+        this.set("round",(Integer)this.get("round")+1).saveIt();
       }
       if((Integer)this.get("round")>=20)
         this.set("state","finalizada").saveIt();
     }
+
   }
 
-  private void waitAnswer(Question question,Category category){
-    System.out.println((String)category.get("tCategory"));
-    System.out.println((String)question.get("description"));
-    question.showRandomAnswer();
-  }
   /**
   *Metodo que permite rendirse durante una partida
   **/

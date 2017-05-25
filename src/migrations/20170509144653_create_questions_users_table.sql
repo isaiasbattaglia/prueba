@@ -1,7 +1,7 @@
 CREATE TABLE categories_users_table(
+  id  int(11) auto_increment PRIMARY KEY,
   user_id  INT(11),
   question_id INT(11),
-  PRIMARY KEY(user_id,question_id),
   created_at DATETIME,
   updated_at DATETIME
 )ENGINE=InnoDB;

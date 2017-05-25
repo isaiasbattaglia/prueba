@@ -8,6 +8,7 @@ CREATE TABLE users (
   total_points 	INT,
   correct_questions INT,
   incorrect_questions INT,
+  total_questions INT,
   created_at DATETIME,
   updated_at DATETIME
 )ENGINE=InnoDB;
