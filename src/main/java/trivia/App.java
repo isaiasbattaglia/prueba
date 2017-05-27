@@ -2,16 +2,22 @@ package trivia;
 import org.javalite.activejdbc.Base;
 import trivia.User;
 import java.util.List;
-/**
- * Hello world!
- *
- */
+
+import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+
+import static spark.Spark.*;
+
+import spark.ModelAndView;
+//import spark.template.mustache.MustacheTemplateEngine;
+
 public class App{
   public static void main( String[] args )
   {
     Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/trivia", "root", "root");
 
-    User u = new User();
+    /*User u = new User();
     u.set("username", "Maradona");
     u.set("password", "messi");
     u.saveIt();
@@ -42,9 +48,25 @@ public class App{
     for(Game g: juegos)
       System.out.println((Integer)g.get("id"));
 
-    System.out.println((String)((game.getRandomCategory()).get("tCategory")));
+    System.out.println((String)((game.getRandomCategory()).get("tCategory")));*/
 
-    game.play();
+    //game.play();
+     get("/", (req, res) -> "Bienvenido a pregunta2");
+     get("/login", (req,res) -> "Ingrese el nombre de usuario");
+  
+    /*get("/", function (req, res) {
+      // devuelve un html con un mensaje bienvenido, un buton jugar
+      System.out.println(req.question_id);
+    });
+
+    get("/play" ...)
+    // vas a pedirle al usuario su nombre para despues crear un jeugo
+
+    post("/user" ...)
+
+    post "/game"
+
+    put "/game"*/
     /*Game g = new Game();
     User u = User.find("username = ?", "Maradona");
     g.set("user_id", u.id);
@@ -53,9 +75,11 @@ public class App{
 
     //User u2 = new User("juan","pepe@gmail.com","1234");
     //u2.saveIt();
-    //Base.close();
+    Base.close();
 
-
+    /*post('/user/:id/play', (req, res) => {
+        query_params.get("option")
+    })*/
 
     }
 }

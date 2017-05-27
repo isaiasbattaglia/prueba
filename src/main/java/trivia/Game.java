@@ -40,7 +40,7 @@ public class Game extends Model {
         Category category = getRandomCategory();
         this.add(category);
         Question question = category.getQuestion();
-        //question.add(user);
+        question.add(user);
         valid = user.answerQuestion(question);
         this.set("round",(Integer)this.get("round")+1).saveIt();
       }
