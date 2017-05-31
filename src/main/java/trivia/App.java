@@ -10,6 +10,7 @@ import java.util.Map;
 import static spark.Spark.*;
 
 import spark.ModelAndView;
+import spark.template.mustache.MustacheTemplateEngine;
 //import spark.template.mustache.MustacheTemplateEngine;
 
 public class App{
@@ -51,9 +52,38 @@ public class App{
     System.out.println((String)((game.getRandomCategory()).get("tCategory")));*/
 
     //game.play();
-     get("/", (req, res) -> "Bienvenido a pregunta2");
-     get("/login", (req,res) -> "Ingrese el nombre de usuario");
+        
+        Map map = new HashMap();
+        map.put("name", "Sam");
+        map.put("value", 1000);
+        map.put("taxed_value", 1000 - (1000 * 0.4));
+        map.put("in_ca", true);
+
+    // home
+    //get("/", () -> {} );
+
+     get("/users", (req, res) -> {
+        // crear vista users
+        // listar users con las etiquetas li y ul
+        // para esto usar foreach dentro de mustache
+       return new ModelAndView(map, "./views/users.mustache");
+      }, new MustacheTemplateEngine()
+      );
+
+     get("/user/new", (req, res) -> {
+        return new ModelAndView(map, "./views/users/new.mustache");
+    }, new MustacheTemplateEngine());
   
+
+    /* Esto se encarga de crear un usuario nuevo y devuelve la vista para jugar */
+    post("/users", (req, res) -> {
+        Map map2 = new HashMap();
+        map2.put("nickname", req.queryParams("nickname"));
+        // Aca guardaras el user
+        return new ModelAndView(map2, "./views/users/play.mustache");
+        }, new MustacheTemplateEngine()
+    );
+
     /*get("/", function (req, res) {
       // devuelve un html con un mensaje bienvenido, un buton jugar
       System.out.println(req.question_id);
