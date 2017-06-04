@@ -19,6 +19,7 @@ public class Game extends Model {
   	set("round",0);
   	set("user_id",user_id);
     set("state","en_proceso");
+    saveIt();
   }
 
   /**

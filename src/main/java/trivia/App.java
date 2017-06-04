@@ -11,105 +11,104 @@ import static spark.Spark.*;
 
 import spark.ModelAndView;
 import spark.template.mustache.MustacheTemplateEngine;
-//import spark.template.mustache.MustacheTemplateEngine;
 
 public class App{
-  public static void main( String[] args )
-  {
+  public static void main( String[] args ){
     Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/trivia", "root", "root");
 
-    /*User u = new User();
-    u.set("username", "Maradona");
-    u.set("password", "messi");
-    u.saveIt();
+    //Home del juego
+    get("/", (req,res) -> {
+      Map map = new HashMap();
+			return new ModelAndView(map, "./views/home.html");
+    },new MustacheTemplateEngine());
 
-    Category c = new Category();
-    c.set("tCategory","deportes");
-    c.set("tCategory","deportes");
-    c.set("tCategory","Historia");
-    c.saveIt();
+    /*Se muestra la vista cuando alguien se desea registrar en el juego*/
+    post("/registrar", (req,res) -> {
+      Map map = new HashMap();
+      return new ModelAndView(map, "./views/users/new.mustache");
+    },new MustacheTemplateEngine());
 
-    Question q = new Question();
-    q.set("description", "quien es el mejor?");
-    q.set("answer1", "River");
-    q.set("answer2", "Boca");
-    q.set("category_id",c.get("id"));
-    q.saveIt();
+    /*Se muestra la vista cuando alguien se desea loguear,
+    *Este metodo hace un post en /games*/
+    post("/login", (req,res) ->{
+    	Map map = new HashMap();
+      return new ModelAndView(map, "./views/users/LogIn.mustache");
+    },new MustacheTemplateEngine());
 
-    User user = new User("Isaias","Isaias@gmail.com","123");
-    user.saveIt();
-    Game game = user.createGame();
-    Game game2 = user.createGame();
-    Game game3 = u.createGame();
-    game.saveIt();
-    game2.saveIt();
-    game3.saveIt();
-    //user.play();
-    List<Game> juegos = user.getGame();
-    for(Game g: juegos)
-      System.out.println((Integer)g.get("id"));
+    /*Busca en la base de datos si el usuario es correcto, en caso de ser valido, crea una sesion para ese usuario
+    * y muestra la vista new game, en el caso de no ser correcto el usuario se redirecciona a la ventana login*/
+    post("/games", (req,res) ->{
+      Map map =new HashMap();
+      Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/trivia", "root", "root");
+      boolean valid = User.validUser(req.queryParams("nickname"),req.queryParams("password"));  //Se valida que el usuario sea correcto.
+      if (valid){
+          User currentUser = User.getUser(req.queryParams("nickname"),req.queryParams("password"));
+          Object id_O = currentUser.getId();
+          String s = id_O.toString();
+          Long id= Long.parseLong(s);
+          req.session(true);
+          req.session().attribute("user", id);
+          Base.close();
+          return new ModelAndView(map,"./views/games/home.mustache");
+      }
+      else{
+        Base.close();
+        return new ModelAndView(map,"./views/users/LogIn.mustache");
+      }
+      }, new MustacheTemplateEngine());
+    
+    /*Vista cuando se comienza un nuevo juego*/
+    post("/newGame", (req,res)->{
+      Map map = new HashMap();
+      Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/trivia", "root", "root");
+      Game game = new Game(req.session().attribute("user"));
+      Base.close();
+      return new ModelAndView(map,"./views/users/new.mustache");
+    },new MustacheTemplateEngine());
 
-    System.out.println((String)((game.getRandomCategory()).get("tCategory")));*/
 
-    //game.play();
-        
-        Map map = new HashMap();
-        map.put("name", "Sam");
-        map.put("value", 1000);
-        map.put("taxed_value", 1000 - (1000 * 0.4));
-        map.put("in_ca", true);
+    /*Debe listar los usuarios registrados*/
+    get("/users", (req, res) -> {
+      // crear vista users
+      // listar users con las etiquetas li y ul
+      // para esto usar foreach dentro de mustache
+      Map map = new HashMap();
+      return new ModelAndView(map, "./views/users.mustache");
+    }, new MustacheTemplateEngine());
 
-    // home
-    //get("/", () -> {} );
-
-     get("/users", (req, res) -> {
-        // crear vista users
-        // listar users con las etiquetas li y ul
-        // para esto usar foreach dentro de mustache
-       return new ModelAndView(map, "./views/users.mustache");
-      }, new MustacheTemplateEngine()
-      );
-
-     get("/user/new", (req, res) -> {
-        return new ModelAndView(map, "./views/users/new.mustache");
+     /*Vista para crear nuevo usuario*/
+    get("/user/new", (req, res) -> {
+      Map map = new HashMap();
+      return new ModelAndView(map, "./views/users/new.mustache");
     }, new MustacheTemplateEngine());
   
-
     /* Esto se encarga de crear un usuario nuevo y devuelve la vista para jugar */
     post("/users", (req, res) -> {
-        Map map2 = new HashMap();
-        map2.put("nickname", req.queryParams("nickname"));
-        // Aca guardaras el user
-        return new ModelAndView(map2, "./views/users/play.mustache");
-        }, new MustacheTemplateEngine()
-    );
+      Map map2 = new HashMap();
+      Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/trivia", "root", "root");
+      map2.put("nickname", req.queryParams("nickname"));
+      User u=new User();
+      u.set("username", req.queryParams("nickname")).saveIt();
+      u.set("email", req.queryParams("Email")).saveIt();
+      u.set("password", req.queryParams("password")).saveIt();
+      Base.close();
+      return new ModelAndView(map2, "./views/users/play.mustache");
+      }, new MustacheTemplateEngine());
 
-    /*get("/", function (req, res) {
-      // devuelve un html con un mensaje bienvenido, un buton jugar
-      System.out.println(req.question_id);
-    });
-
-    get("/play" ...)
-    // vas a pedirle al usuario su nombre para despues crear un jeugo
-
-    post("/user" ...)
-
-    post "/game"
-
-    put "/game"*/
-    /*Game g = new Game();
-    User u = User.find("username = ?", "Maradona");
-    g.set("user_id", u.id);
-    Question q = g.getQuestion();
-    q.answer("Boca");*/
-
-    //User u2 = new User("juan","pepe@gmail.com","1234");
-    //u2.saveIt();
-    Base.close();
-
-    /*post('/user/:id/play', (req, res) => {
-        query_params.get("option")
-    })*/
-
-    }
+    /*Vista del juego cuando se pide una pregunta*/
+    get("/games", (req,res)->{
+    	Base.open();
+    	Category c = new Category();
+    	c = c.randomCategory();
+    	Question q = c.getQuestion();
+    	Map map = new HashMap();
+    	map.put("Question",q.get("description"));
+    	map.put("answer1",q.get("answer1"));
+    	map.put("answer2",q.get("answer2"));
+    	map.put("answer3",q.get("answer3"));
+    	map.put("answer4",q.get("answer4"));
+    	Base.close();  	
+    	return new ModelAndView(map, "./views/questions/show.mustache");
+    },new MustacheTemplateEngine());
+  }
 }

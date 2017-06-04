@@ -22,6 +22,7 @@ public class User extends Model {
   **/
   public User(String username, String email, String password){
     validatePresenceOf("username").message("Please, provide your username");
+    validatePresenceOf("password").message("Please, provide your username");
     set("username", username);
     set("email",email);
     set("password",password);
@@ -31,6 +32,7 @@ public class User extends Model {
     set("correct_questions",0);
     set("incorrect_questions",0);
     set("total_questions",0);
+    
   }
   /**
   *Metodo que permite modificar las vidas de un usuario
@@ -99,5 +101,16 @@ public class User extends Model {
     }
     return;
   }
-  
+
+  public static boolean validUser(String name, String password){
+    List<User> user = User.where("username = ? and password = ? ", name, password);
+    return user.size()==1;
+  }
+
+  public static User getUser(String name, String password){
+    List<User> ls = User.where("username = ? and password = ? ",name,password);
+    if (ls.size()==0)
+      throw new IllegalArgumentException("NO valid user");
+    return ls.get(0);
+  }
 }
