@@ -4,12 +4,19 @@
 <title></title>
 </head>
 <body>
-<h1></h1>
-<form action="/newGame" method="post">
-<input type="submit" value="Nuevo Juego">
+<h1>Vidas {{lives}}</h1>
+<form action="/newGame" method="get">
+	<input type="submit" value="Nuevo Juego">
 </form>
-<form action="/play" method="post">
-<input type="submit" value="Jugar">
+<h4>Lista Juegos Pendientes:</h4>
+<ul>
+	{{#games}}
+	<li> Juego:{{state}} 
+	<form action="/play" method="post">
+	<input type="submit" value="Jugar">
+	</li>
+	{{/games}}
+</ul>
 </form>
 </body>
 </html>

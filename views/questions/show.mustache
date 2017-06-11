@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html>
 <body>
-  <h1>{{Question}}</hi>
-<p><button type="button" onclick=>{{answer2}}</button></p>
+  <h1>{{category}}</hi>
+  <h2>{{Question}}</hi>
+<p>
+<form action="/answer/{{qs.id}}" method="post">
+	<input type="submit" value={{answer2}}></p></form>
 <button type="button" onclick=>{{answer1}}</button></p>
 <button type="button" onclick=>{{answer3}}</button></p>
 <button type="button" onclick=>{{answer4}}</button></p>
+
+
 
 </body>
 </html>

@@ -1,0 +1,87 @@
+*{
+	margin:0;
+	padding:0;
+}
+img{
+	width: 50%;
+	position: relative;
+		left: -50px;
+}
+
+body{
+	background-image: url("/img/fondo.jpg");
+	color: #ccc;
+	text-align: center;
+	font-size: 20px;
+	float:center;
+	margin: 15px;
+}
+
+h2{	
+	text-align: center;	
+	font-family: "Arial Black";
+	font-size: 2em;
+	color: #fff;
+	text-shadow: 1px 2px 10px #000;
+}
+h3 i{
+	font-family: "purisa";
+	text-align: center;	
+	font-size: 1em;
+	color:#fff;
+}
+
+
+.b1{
+	background-color: #00365F;
+	border: none;
+	float: left;
+	color:#ccc;
+	padding: 15px;
+	position: relative;
+		right: -10px;
+}
+
+.b1:hover{
+	background-color: #2C96D7;
+	border: none;
+	float: left;
+	color:#ccc;
+	padding: 15px;
+	position: relative;
+		right: -12px;
+}
+
+
+.b2{
+	color: #787878;
+	border:1px;
+	padding: 15px;
+	width: 30%;
+}
+input{
+	background-color: none;
+}
+
+input[class="b2"]{
+	background-color: #0677BE;
+	color: #fff;
+	border:none;
+	padding: 5px;
+}
+
+input[class="b2"]:hover {
+	background-color: #2C96D7;
+	color: #fff;
+	border:none;
+	padding: 5px;
+}
+
+form[class="login"]{
+	background-color: rgba(0,0,0,.3);
+	width:  40%;
+	padding: 5px;
+	color:#fff;
+	position: relative;
+		left: 30%;
+}

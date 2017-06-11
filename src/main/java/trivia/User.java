@@ -32,14 +32,14 @@ public class User extends Model {
     set("correct_questions",0);
     set("incorrect_questions",0);
     set("total_questions",0);
-    
+    saveIt();
   }
   /**
   *Metodo que permite modificar las vidas de un usuario
   *@Param newLives nuevas vidas del usuario
   **/
-  public void setLives(int newLives)
-  {set("lives",newLives);}
+  public void setLives(Integer newLives)
+  {set("lives",newLives).saveIt();}
 
   /**
   *Metodo que crea un juego para un determinado usuario
@@ -112,5 +112,9 @@ public class User extends Model {
     if (ls.size()==0)
       throw new IllegalArgumentException("NO valid user");
     return ls.get(0);
+  }
+
+  public String username(){
+    return (String)this.get("username");
   }
 }

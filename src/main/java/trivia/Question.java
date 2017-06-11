@@ -1,6 +1,7 @@
 package trivia;
 
 import org.javalite.activejdbc.Model;
+import java.util.*;
 
 public class Question extends Model {
   static{
@@ -43,4 +44,15 @@ public class Question extends Model {
   public boolean validateAnswer(Integer numberOfAnswer){
     return numberOfAnswer==1;
   }
+
+  public List<String> randomAnswers(){
+    List<String> arr = new ArrayList<String>();
+    arr.add(0,(String)this.get("answer1"));
+    arr.add(1,(String)this.get("answer2"));
+    arr.add(2,(String)this.get("answer3"));
+    arr.add(3,(String)this.get("answer4"));
+    Collections.shuffle(arr);
+    return arr;
+  }
+  
 }

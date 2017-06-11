@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Pregunta2</title>
+		<link rel="stylesheet" type="text/css" href="/css/home.css">
+	</head>
+	<body>
+		<header>
+			<audio id="sound" src="/sounds/fondo2.mp3" autoplay loop="100" ></audio>
+			<script>
+			var s = document.getElementById("sound");
+			s.volume=0.5;
+			</script> 
+			<nav>
+				<form  action="/registrar" method="get">
+				<input class="b1" type="submit" value="REGISTRARSE">
+				</form>
+			</nav>
+			<br>
+			<div>
+				<img src="img/pregunta2.png" alt="Imagen Preguntados" width=100% >
+			</div>
+
+		</header>
+		<section>
+			<h2><strong>Pregunta2</strong></h2>
+			<h3><i>"Un juego de Preguntas y respuestas"</i></h3>
+			<br>
+			<form class="login" action="/games" method="get">
+				<h3>Iniciar Sesion</h3>
+				Nickname:<br>
+			 	<input type="text" name="nickname">
+			 	<br>
+			 	Password:<br>
+				<input type="password" name="password">
+				<br><br>
+				<input class="b2" type="submit" value="Entrar">
+			</form> 
+		</section>
+	</body>
+</html>

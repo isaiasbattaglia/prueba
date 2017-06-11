@@ -19,6 +19,7 @@ public class Game extends Model {
   	set("round",0);
   	set("user_id",user_id);
     set("state","en_proceso");
+    //User user = this.parent(User.class);
     saveIt();
   }
 
@@ -56,4 +57,9 @@ public class Game extends Model {
   **/
   public void whiteFlag()
     {set("state","finalizada");}
+  
+
+  public String state(){
+    return (String) this.get("state");
+  }
 }
