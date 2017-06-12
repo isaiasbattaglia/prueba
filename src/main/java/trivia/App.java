@@ -78,7 +78,7 @@ public class App{
       }}, new MustacheTemplateEngine());
     
     /*Vista cuando se comienza un nuevo juego*/
-    get("/newGame", (req,res)->{
+    post("/newGame", (req,res)->{
       Map map = new HashMap();
       //Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost/trivia", "root", "root");
       Object id_O = (Object) req.session().attribute("user");
@@ -94,7 +94,7 @@ public class App{
         String idc = (c.getId()).toString();
         Long id_Cat = Long.parseLong(idc);
         map.put("category_id",id_Cat);
-        //Base.close();
+        Base.close();
         return new ModelAndView(map,"./views/category/randomCategory.mustache");
       }
       else{
@@ -102,7 +102,7 @@ public class App{
         games.size();
         map.put("games",games);
         map.put("lives",actualUser.get("lives"));
-        //Base.close();
+        Base.close();
         return new ModelAndView(map,"./views/games/home.mustache");
       } 
     },new MustacheTemplateEngine());

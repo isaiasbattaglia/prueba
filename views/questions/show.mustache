@@ -1,16 +1,39 @@
 <!DOCTYPE html>
 <html>
+<header>
+	<link rel="stylesheet" type="text/css" href="css/question.css">
+</header>
 <body>
-  <h1>{{category}}</hi>
-  <h2>{{Question}}</hi>
-<p>
-<form action="/answer/{{qs.id}}" method="post">
-	<input type="submit" value={{answer2}}></p></form>
-<button type="button" onclick=>{{answer1}}</button></p>
-<button type="button" onclick=>{{answer3}}</button></p>
-<button type="button" onclick=>{{answer4}}</button></p>
+	<div class="bloque">
+		
+		<h2>{{category}}</h2>
+		<h1>{{Question}}</h1>
 
+		<p>
+			<form action="/answer/{{qs.id}}" method="post">
+			<input type="submit" value={{answer1}}></form>
+		</p>
 
+		<p>
+			<form action="/answer/{{qs.id}}" method="post">
+			<input type="submit" value={{answer2}}></form>
+		</p>
+
+		<p>
+			<form action="/answer/{{qs.id}}" method="post">
+			<input type="submit" value={{answer3}}></form>
+		</p>
+
+		<p>
+			<form action="/answer/{{qs.id}}" method="post">
+			<input type="submit" value={{answer4}}></form>
+		</p>		
+	</div>
+
+	<div>
+		<img src="img/pregunta2.png">
+	</div>
+	
 
 </body>
 </html>

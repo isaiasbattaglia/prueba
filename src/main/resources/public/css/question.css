@@ -1,0 +1,66 @@
+*{
+	margin:0;
+	padding:0;
+}
+
+body{
+	background-image: url("/img/fondo.jpg");
+	background-size: 100%;
+	font-size: 20px;
+	text-align:center;
+
+}
+
+div[class="bloque"]{
+	background:rgba(255,255,255,.7);
+	width: 70%;
+	padding: 20px;
+	position: relative;
+		top:100px;
+		left:15%;
+
+}
+
+input{
+	background:#fff;
+	border:none;
+	padding: 10px;
+	margin: 2px;
+	border-radius: 40px;
+}
+
+input:hover{
+	background:#35A03A;
+	border:none;
+	padding: 10px;
+	margin: 2px;
+	border-radius: 40px;
+}
+
+h1{
+	color:#000;
+	background:#fff; 
+	border-radius: 50px;
+	font-family: "BP Diet";
+	padding: 5px;
+	margin: 2px;
+
+}
+
+h2{
+	text-shadow: 10px 5px 5px #000;
+	color:#fff;
+	background:#0B4C89; 
+	border-radius: 50px;
+	font-family: "BP Diet";
+	padding: 5px;
+	margin: 2px;
+
+}
+
+img{
+	width: 50%;
+	position:relative;
+		top:100px;
+}
+

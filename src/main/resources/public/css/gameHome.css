@@ -1,0 +1,110 @@
+**{
+	margin:0;
+	padding:0;
+}
+
+body{
+	background-image: url("/img/fondo.jpg");
+	background-size: 100%;
+	font-size: 20px;
+	text-align:center;
+}
+
+div[class="bloque"]{
+	background: rgba(255,255,255,.3);
+	margin:20px;
+	padding: 10px;
+	position: relative;
+		top:50px;
+}
+
+div[class="img"]{
+	width: 8%;
+	float:left;
+}
+
+div[class="img2"]{
+	width: 100%;
+	position:relative;
+		left: 20%;
+		bottom:70px;
+
+}
+
+
+p{
+	color:#fff;
+	text-align: left;
+	font-family: "BP Diet";
+	position: absolute;
+		left: 10px;
+}
+
+input[class="nuevoJuego"]{
+	color:#fff;
+	border-radius: 40px;
+	padding: 5px;
+	background: #000;
+	border:none;
+	width: 300px;
+	font-family: "BP Diet";
+}
+input[class="nuevoJuego"]:hover{
+	color:#fff;
+	border-radius: 40px;
+	padding: 5px;
+	background: #000;
+	border:none;
+	width: 300px;
+	font-family: "BP Diet";
+}
+
+div[class="bloque2"]{
+	background:#A9F5A9;
+	border-radius: 10px;
+	margin: 50px;
+	position:relative;
+		bottom: 70px;
+}
+
+h4{
+	color: #000;
+	font-family: "BP Diet";
+	background: #58FA58;
+	border-radius: 40px;
+	padding: 10px;
+}
+
+div[class="cajas"]{
+	list-style: none;
+	margin: 5px;
+	background:#ccc;
+	border-radius: 10px;
+	width: 300px;
+	position:relative;
+		left:30%; 
+}
+
+input[class="jugar"]{
+	border-radius: 40px;
+	background: #fff;
+	border:none;
+	padding: 3px;
+	position:absolute;
+		left: 250px;
+		bottom:2px;
+}
+
+input[class="jugar"]:hover{
+	border-radius: 40px;
+	background: #aaa;
+	border:none;
+	padding: 3px;
+	position:absolute;
+		left: 250px;
+		bottom:2px;
+}
+
+h3{
+	text-align: left;
+}
