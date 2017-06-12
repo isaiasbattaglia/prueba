@@ -15,7 +15,7 @@ public class Category extends Model {
   *@Param name nombre de la categoria
   **/
   public Category(String name){
-  	set("tCategory",name);
+  	set("tCategory",name).saveIt();
   }
   /**
   *Metodo que obtiene una categoria aleatoria

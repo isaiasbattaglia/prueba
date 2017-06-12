@@ -65,7 +65,7 @@ public class User extends Model {
     return false;
   }
 
-  private void updateProfile(boolean answerOfQuuestion){
+  public void updateProfile(boolean answerOfQuuestion){
     this.set("total_questions",(Integer)this.get("total_questions")+1).saveIt();
     if (answerOfQuuestion) {
       this.set("correct_questions", (Integer) this.get("correct_questions")+1).saveIt();

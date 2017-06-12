@@ -4,26 +4,18 @@
 <link rel="stylesheet" type="text/css" href="css/gameHome.css">
 </head>
 <body>
-	
-		<form action="/newGame" method="get">
-			<input class="nuevoJuego" type="submit" value="Nuevo Juego">
-		</form>
 	<div class="bloque">
-		
 		<div class="img">
 			<img src="img/vidas.png" width="30">
 		</div>
 		<p> {{lives}} </p>
 
-		<br><br>
-		
-		<div class="img2">
-			<img src="img/arte.png" width="100">
-		</div>
+		<form action="/newGame" method="post">
+			<input class="nuevoJuego" type="submit" value="Nuevo Juego">
+		</form>
 
-		
+		<br><br><br>
 		<div class="bloque2">
-			<form >
 				<h4>Lista Juegos Pendientes:</h4>
 				<ul>
 					{{#games}}
@@ -32,13 +24,14 @@
 							<h3>Juego:{{state}}</h3> 
 							<form action="/play" method="post">
 								<input class="jugar" type="submit" value="Jugar">
+								<input type="hidden" name="game_id" value="{{id}}">
 							</form>
 						</li>
 					</div>
 					{{/games}}
 				</ul>
-			</form>
 		</div>
+		
 	</div>
 </body>
 </html>

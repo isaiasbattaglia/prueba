@@ -62,4 +62,12 @@ public class Game extends Model {
   public String state(){
     return (String) this.get("state");
   }
+
+  public void incrementRound(){
+    this.set("round",(Integer)this.get("round")+1).saveIt();
+  }
+
+  public void finalized(){
+    this.set("state","finalizada").saveIt();
+  }
 }

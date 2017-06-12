@@ -10,24 +10,37 @@
 		<h1>{{Question}}</h1>
 
 		<p>
-			<form action="/answer/{{qs.id}}" method="post">
-			<input type="submit" value={{answer1}}></form>
+			<form action="/answer?question={{answer1}}" method="post">
+			<input type="submit" value={{answer1}}>
+			<input type="hidden" name="quest" value="{{quest.id}}">
+			<input type="hidden" name="game_id" value="{{game_id}}">	
+			</form>
 		</p>
 
 		<p>
-			<form action="/answer/{{qs.id}}" method="post">
-			<input type="submit" value={{answer2}}></form>
+			<form action="/answer?question={{answer2}}" method="post">
+			<input type="submit" value={{answer2}}>
+			<input type="hidden" name="quest" value="{{quest.id}}">	
+			<input type="hidden" name="game_id" value="{{game_id}}">	
+			</form>
 		</p>
 
 		<p>
-			<form action="/answer/{{qs.id}}" method="post">
-			<input type="submit" value={{answer3}}></form>
+			<form action="/answer?question={{answer3}}" method="post">
+			<input type="submit" value={{answer3}}>
+			<input type="hidden" name="quest" value="{{quest.id}}">	
+			<input type="hidden" name="game_id" value="{{game_id}}">	
+			</form>
 		</p>
 
 		<p>
-			<form action="/answer/{{qs.id}}" method="post">
-			<input type="submit" value={{answer4}}></form>
-		</p>		
+			<form action="/answer?question={{answer4}}" method="post">
+			<input type="submit" value={{answer4}}>
+			<input type="hidden" name="quest" value="{{quest.id}}">	
+			<input type="hidden" name="game_id" value="{{game_id}}">	
+			</form>
+		</p>	
+
 	</div>
 
 	<div>

@@ -22,6 +22,7 @@ public class Question extends Model {
     set("answer2",ans2);
     set("answer3",ans3);
     set("answer4",ans4);
+    saveIt();
 	}
   /**
   *Metodo que muestra las respuesta a una pregunta de forma aleatoria
