@@ -17,8 +17,11 @@ public class Game extends Model {
   **/
   public Game(Long user_id){
   	set("round",0);
+    set("total_rounds",5);
   	set("user_id",user_id);
     set("state","en_proceso");
+    set("questions_Correct",0);
+    set("questions_Incorrect",0);
     //User user = this.parent(User.class);
     saveIt();
   }
@@ -68,6 +71,20 @@ public class Game extends Model {
   }
 
   public void finalized(){
-    this.set("state","finalizada").saveIt();
+    this.set("state","finalizado").saveIt();
+  }
+
+  public Integer getTotalRounds(){
+    return (Integer)this.get("total_rounds");
+  }
+
+  public Integer getActualRound()
+  {return (Integer)this.get("round");}
+
+  public void updateGame(boolean correct){
+    if(correct)
+      set("questions_Correct",(Integer)get("questions_Correct")+1).saveIt();
+    else
+      set("questions_Incorrect",(Integer)get("questions_Incorrect")+1).saveIt();
   }
 }

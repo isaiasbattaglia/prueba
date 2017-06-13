@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html>
 <header>
-	
+	<link rel="stylesheet" type="text/css" href="css/correct.css">
 </header>
 <body>
-	<h1>  {{correct}}</h1>
-	<form action="/play" method="post">
-		<input type="submit" value="Seguir">
-		<input type="hidden" name="game_id" value="{{game_id}}">	
-	</form>
+	<div class="caja">
+		<h1> {{correct}}</h1>
+		{{#final}}
+			<form action="/finalizedGame" method="get">
+				<input class="b1" type="submit" value="SEGUIR JUGANDO">
+				<input type="hidden" name="game_id" value="{{game_id}}">
+			</form>
+		{{/final}}
+		{{#no_final}}
+			<form action="/play" method="get">
+				<input class="b1" type="submit" value="SEGUIR JUGANDO">
+				<input type="hidden" name="game_id" value="{{game_id}}">
+			</form>
+		{{/no_final}}
+	</div>
 </body>
 </html>

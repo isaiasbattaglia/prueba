@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<header>
+	<link rel="stylesheet" type="text/css" href="/css/profile.css">
+</header>
+<body>
+	<div class="caja">
+		<form action="/games" method="get">
+			<input class="cancelar" type="submit" value=" X ">
+		</form>
+			<h1>{{user}}</h1>
+		<div class="box">
+			<h2>Vidas: {{lifes}}</h2>
+			<h2>Puntos: {{Total_Points}}</h2>
+			<h2>Puntos para siguiente nivel: {{points_to_next_level}}</h2>
+			<h2>Preguntas Correctas: {{correct_questions}}</h2>
+			<h2>Preguntas Incorrectas: {{incorrect_questions}}</h2>
+			<h2>Nivel: {{level}}</h2>
+		</div>
+	</div>
+</body>
+</html>

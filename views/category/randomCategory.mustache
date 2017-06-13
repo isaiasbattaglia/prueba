@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html>
 <header>
-	
+	<link rel="stylesheet" type="text/css" href="css/randomCategory.css">
 </header>
 <body>
-
-	<h1>Categoria Aleatoria ... {{category}}</h1>
-	<form action="/questions" method="get">
-	<input type="hidden" name="category" value="{{category}}">
-	<input type="hidden" name="category_id" value="{{category_id}}">
-	<input type="hidden" name="game_id" value="{{game_id}}">
-	<input type="submit" value="Jugar">
-</form>
+	<div class="box">
+		<form action="/games" method="get">
+				<input class="cancelar" type="submit" value=" X ">
+		</form>
+		<div><img src="img/rueda.png"></div>
+		<h1>La Categoria es:{{category}}</h1>
+		<form action="/questions" method="get">
+			<input type="hidden" name="category" value="{{category}}">
+			<input type="hidden" name="category_id" value="{{category_id}}">
+			<input type="hidden" name="game_id" value="{{game_id}}">
+			<input class="jugar" type="submit" value="Jugar">
+		</form>		
+	</div>
 </body>
 </html>

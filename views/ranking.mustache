@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="css/gameHome.css">
+</head>
+<body>
+	<h4>Ranking de usuarios:</h4>
+		<div class="bloque2">
+				<h4>ranking:</h4>
+				<ul>
+					{{#ranking}}
+					<div class="cajas">
+						<li> 
+							<h3>usuario: {{username}} | Nivel: {{level}}</h3> 
+						</li>
+					</div>
+					{{/ranking}}
+				</ul>
+		</div>
+</body>
+</html>

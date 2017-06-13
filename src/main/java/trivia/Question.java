@@ -55,5 +55,10 @@ public class Question extends Model {
     Collections.shuffle(arr);
     return arr;
   }
+
+  public Category getCategory(){
+    Category c = this.parent(Category.class);
+    return c;
+  }
   
 }

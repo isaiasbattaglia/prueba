@@ -1,0 +1,47 @@
+*{
+	margin:0;
+	padding:0;
+}
+body{
+	background-image: url("/img/fondo.jpg");
+	background-size: 100%;
+	color: #ccc;
+	text-align: center;
+	font-size: 20px;
+	float:center;
+	margin: 15px;
+}
+
+div[class="caja"]{	
+	padding: 40px;
+	color: #fff;
+	background: rgba(0,0,0,.5);
+	border-radius: 40px;
+	width: 40%;
+	position: relative;
+		top:200px;
+		left: 25%;
+
+}
+
+input[class="b1"]{
+	color: #fff;
+	padding: 20px;
+	margin: 10px;
+	background: #E18C04;
+	border: none;
+	border-radius: 30px;
+}
+input[class="b1"]:hover{
+	color: #fff;
+	padding: 20px;
+	margin: 10px;
+	background: #FFA109;
+	border: none;
+	border-radius: 30px;
+}
+
+img{
+	width: 30%;
+	
+}

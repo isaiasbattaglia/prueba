@@ -4,25 +4,50 @@
 <link rel="stylesheet" type="text/css" href="css/gameHome.css">
 </head>
 <body>
+	<table class="menu">
+		<tl>
+			<td>
+				<form action="/ranking" method="get">
+					<input class="ranking" type="submit" value="Ranking">
+				</form>
+			</td>
+			<td>
+				<form action="/profile" method="get">
+					<input class="profile" type="submit" value="Perfil">
+				</form>				
+			</td>
+			<td>
+				<form action="/logout" method="get">
+					<input class="logout" type="submit" value="Cerrar Sesion">
+				</form>					
+			</td>
+		</tl>
+	</table>
+
 	<div class="bloque">
-		<div class="img">
+		<div class="lives">
 			<img src="img/vidas.png" width="30">
+			<p> {{lives}} </p>
 		</div>
-		<p> {{lives}} </p>
+		<div class="level">
+			<img src="img/win.png" width="30">
+			<p> {{level}} </p>
+		</div>
 
 		<form action="/newGame" method="post">
-			<input class="nuevoJuego" type="submit" value="Nuevo Juego">
+			<input class="newGame" type="submit" value="Nuevo Juego">
 		</form>
-
-		<br><br><br>
+		<h1>
+    		<b><font size="4" color="red">{{error}}</font></b>
+  		</h1>
+		<h4>Lista Juegos Pendientes</h4>
 		<div class="bloque2">
-				<h4>Lista Juegos Pendientes:</h4>
 				<ul>
 					{{#games}}
 					<div class="cajas">
 						<li> 
 							<h3>Juego:{{state}}</h3> 
-							<form action="/play" method="post">
+							<form action="/play" method="get">
 								<input class="jugar" type="submit" value="Jugar">
 								<input type="hidden" name="game_id" value="{{id}}">
 							</form>

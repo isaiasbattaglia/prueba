@@ -8,20 +8,25 @@
 <body>
   <br>
   <br>
-  <form action="/users" method="post">
+  <form action="/verificar" method="post">
     <h1>Registrarse</h1>
     <br>
     Nickname:<br>
-    <input type="text" name="nickname">
+    <input type="text" name="nickname" required placeholder="Nickname">
     <br>
     Password:<br>
-    <input type="password" name="password">
+    <input type="password" name="password" required placeholder="Password">
+    <br>
+    <input type="password" name="password2" required placeholder="Password">
     <br>
     Email:<br>
-    <input type="email" name="Email">
+    <input type="email" name="Email" required placeholder="Email" autocomplete="off">
     <br><br>
     <input type="submit" value="Registrarse">
   </form> 
+  <h1>
+    <b><font size="4" color="red">{{error}}</font></b>
+  </h1>
   <img src="../img/personajes.png" width="50%">
 </body>
 </html>

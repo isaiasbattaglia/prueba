@@ -8,7 +8,7 @@ public class User extends Model {
   private static Map<Integer,Integer> cache =new HashMap<Integer,Integer> ();
   static{
     validatePresenceOf("username").message("Please, provide your username");
-    //validatePresenceOf("password").message("Please, provide your password");
+    validatePresenceOf("password").message("Please, provide your password");
    // validateRange("lives", 0, 999).message("lives cannot be less than " + 0 + " or more than " + 999);
   }
   
@@ -65,21 +65,21 @@ public class User extends Model {
     return false;
   }
 
-  public void updateProfile(boolean answerOfQuuestion){
+  public void updateProfile(boolean correctAnswer){
     this.set("total_questions",(Integer)this.get("total_questions")+1).saveIt();
-    if (answerOfQuuestion) {
+    if (correctAnswer) {
       this.set("correct_questions", (Integer) this.get("correct_questions")+1).saveIt();
       this.set("total_points",(Integer) this.get("total_points")+10).saveIt();
       Integer points= (Integer)this.get("total_points");
       Integer pointsToNextLevel=pointsToNextLevel();
-      if (pointsToNextLevel.compareTo(points)<0)
+      if (pointsToNextLevel.compareTo(points)<=0)
         updateLevel(points,pointsToNextLevel);    
     }
     else
       this.set("incorrect_questions", (Integer) this.get("incorrect_questions")+1).saveIt();
   }
 
-  private Integer pointsToNextLevel(){
+  public Integer pointsToNextLevel(){
     return (memoFib((Integer)this.get("level")))*10;
   }
 
@@ -116,5 +116,9 @@ public class User extends Model {
 
   public String username(){
     return (String)this.get("username");
+  }
+
+  public Integer level(){
+    return (Integer)this.get("level");
   }
 }
