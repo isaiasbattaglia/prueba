@@ -3,8 +3,12 @@ package trivia;
 import org.javalite.activejdbc.Model;
 import java.util.Random;
 import java.util.List;
+import org.javalite.activejdbc.validation.UniquenessValidator;
+
 public class Category extends Model {
-  static{    
+  static{
+    validatePresenceOf("tCategory").message("Please, provide name of category");
+    validateWith(new UniquenessValidator("tCategory")).message("This category name is already taken.");
   }
   /**
   *Constructor de la clase Category

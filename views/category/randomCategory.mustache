@@ -8,7 +8,6 @@
 		<form action="/games" method="get">
 				<input class="cancelar" type="submit" value=" X ">
 		</form>
-		{{#hist_art}}
 			{{#historia}}
 				<p>Categoria Aleatoria:</p>
 				<div><img src="img/historia.png"></div>
@@ -17,8 +16,7 @@
 				<p>Categoria Aleatoria:</p>
 				<div><img src="img/arte.png"></div>
 			{{/arte}}
-		{{/hist_art}}
-		{{#cie_ent}}
+	
 			{{#ciencia}}
 				<p>Categoria Aleatoria:</p>
 				<div><img src="img/ciencia.png"></div>
@@ -27,8 +25,7 @@
 				<p>Categoria Aleatoria:</p>
 				<div><img src="img/entretenimiento.png"></div>
 			{{/entretenimiento}}
-		{{/cie_ent}}
-		{{#dep_geo}}
+
 			{{#deportes}}
 				<p>Categoria Aleatoria:</p>
 				<div><img src="img/deporte.png"></div>
@@ -37,7 +34,7 @@
 				<p>Categoria Aleatoria:</p>
 				<div><img src="img/geo.png"></div>
 			{{/geografia}}
-		{{/dep_geo}}
+
 
 		<h1>{{category}}</h1>
 		<form action="/questions" method="get">

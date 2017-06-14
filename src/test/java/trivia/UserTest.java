@@ -30,13 +30,18 @@ public class UserTest{
      @Test
      public void validateUniquenessOfUsernames(){
          User user = new User();
-         user.set("username", "anakin");
+         user.set("username", "pepe");
          user.set("password", "hola");
+         user.set("email", "hola@gmail");
+         user.set("lives", 3);
          user.saveIt();
          User user2 = new User();
          user2.set("username", "pepe");
-         user.set("password", "hola");
-         assertEquals(user2.get("username")!=user.get("username"), true);
+         user2.set("password", "hola");
+         user2.set("email", "hola@gmail.com");
+         user2.set("lives", 3);
+         user2.save();
+         assertEquals(user2.isValid(), false);
      }
 
      @Test
@@ -45,12 +50,15 @@ public class UserTest{
          user.set("username", "hola");
          user.set("password", "hola");
          user.set("email", "hola@gmail.com");
+         user.set("lives", 3);
          user.saveIt();
          User user2 = new User();
          user2.set("username", "hola2");
-         user.set("password", "hola");
+         user2.set("password", "hola");
          user2.set("email", "hola@gmail.com");
-         assertEquals(user2.get("email")!=user.get("email"), false);
+         user2.set("lives", 3);
+         user2.save();
+         assertEquals(user2.isValid(), false);
      }
 
      @Test
@@ -58,6 +66,7 @@ public class UserTest{
          User user = new User();
          user.set("username", "pepe");
          user.set("password", "hola");
+         user.set("email", "hola@gmail.com");
          user.set("lives", -3);
          user.saveIt();
          assertFalse( ((Integer)user.get("lives"))>=0);
@@ -67,6 +76,8 @@ public class UserTest{
          User user = new User();
          user.set("username", "pepe");
          user.set("password", "hola");
+         user.set("email", "hola@gmail.com");
+         user.set("lives", 3);
          user.set("total_points", -3);
          user.saveIt();
          assertFalse( ((Integer)user.get("total_points"))>=0);
@@ -77,6 +88,8 @@ public class UserTest{
          User user = new User();
          user.set("username", "pepe");
          user.set("password", "hola");
+         user.set("email", "hola@gmail.com");
+         user.set("lives", 3);
          user.set("level", -3);
          user.saveIt();
          assertFalse( ((Integer)user.get("level"))>=0);

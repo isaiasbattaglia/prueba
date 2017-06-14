@@ -3,13 +3,17 @@ import java.util.List;
 import org.javalite.activejdbc.Model;
 import java.util.Map;
 import java.util.HashMap;
+import org.javalite.activejdbc.validation.UniquenessValidator;
 
 public class User extends Model {
   private static Map<Integer,Integer> cache =new HashMap<Integer,Integer> ();
   static{
     validatePresenceOf("username").message("Please, provide your username");
     validatePresenceOf("password").message("Please, provide your password");
-   // validateRange("lives", 0, 999).message("lives cannot be less than " + 0 + " or more than " + 999);
+    validatePresenceOf("email").message("please, provide your email");
+    validatePresenceOf("lives").message("");
+    validateWith(new UniquenessValidator("username")).message("This username is already taken.");
+    validateWith(new UniquenessValidator("email")).message("This username is already taken.");
   }
   
   /**
@@ -23,6 +27,7 @@ public class User extends Model {
   public User(String username, String email, String password){
     validatePresenceOf("username").message("Please, provide your username");
     validatePresenceOf("password").message("Please, provide your username");
+    validatePresenceOf("email").message("please, provide your email");
     set("username", username);
     set("email",email);
     set("password",password);

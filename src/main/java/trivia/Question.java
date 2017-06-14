@@ -5,7 +5,11 @@ import java.util.*;
 
 public class Question extends Model {
   static{
-		validatePresenceOf("answer1").message("Please, provide at least one answer"); 
+    validatePresenceOf("description").message("Please, provide a description"); 
+    validatePresenceOf("answer1").message("Please, provide all answers"); 
+    validatePresenceOf("answer2").message("Please, provide all answers"); 
+    validatePresenceOf("answer3").message("Please, provide all answers"); 
+    validatePresenceOf("answer4").message("Please, provide all answers"); 
   }
   /**
   *Constructo de la clase Question
@@ -15,13 +19,18 @@ public class Question extends Model {
   *Constructor de la clase Question
   *@Param description descripcion pregunta, ans1,ans2,ans2,ans4 respuestas a la pregunta
   **/
-  public Question(String description,String ans1, String ans2, String ans3, String ans4){
-		validatePresenceOf("description").message("Please, provide your question description");
+  public Question(String description,String ans1, String ans2, String ans3, String ans4, Long id_C){
+    validatePresenceOf("description").message("Please, provide a description"); 
+    validatePresenceOf("answer1").message("Please, provide all answers"); 
+    validatePresenceOf("answer2").message("Please, provide all answers"); 
+    validatePresenceOf("answer3").message("Please, provide all answers"); 
+    validatePresenceOf("answer4").message("Please, provide all answers"); 
 	  set("description", description);
     set("answer1",ans1);
     set("answer2",ans2);
     set("answer3",ans3);
     set("answer4",ans4);
+    set("category_id",id_C);
     saveIt();
 	}
   /**

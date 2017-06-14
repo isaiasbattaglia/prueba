@@ -6,7 +6,9 @@
 <body>
 	<div class="caja">
 		<h1>  {{incorrect}}</h1>
+		<h2>Respuesta Correcta: {{correct_answer}}</h2>
 		{{#final}}
+
 			<form action="/finalizedGame" method="get">
 				<input class="b1" type="submit" value="SEGUIR JUGANDO">
 				<input type="hidden" name="game_id" value="{{game_id}}">
