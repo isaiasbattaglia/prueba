@@ -118,7 +118,6 @@ public class App{
       String s = id_O.toString();
       Long id = Long.parseLong(s);
       User actualUser = User.findFirst("id = ?",id);
-      System.out.println(id);
       if ((Integer)actualUser.get("lives")>0){
         Game game = new Game(id);
         actualUser.setLives((Integer)actualUser.get("lives")-1);
@@ -129,6 +128,33 @@ public class App{
         map.put("category_id",id_Cat);
         String idg = (game.getId()).toString();
         map.put("game_id",idg);
+
+        String cat =(String) c.get("tCategory");
+        
+        if (cat.equals("Historia")){
+          map.put("hist_art",true);
+          map.put("historia",true);
+        }
+        if (cat.equals("Geografia")){
+          map.put("dep_geo",true);
+          map.put("geografia",true);
+        }
+        if (cat.equals("Ciencia")){
+          map.put("cie_ent",true);
+          map.put("ciencia",true);
+        }
+        if (cat.equals("Entretenimiento")){
+          map.put("cie_ent",true);
+          map.put("entretenimiento",true);
+        }
+        if (cat.equals("Deportes")){
+          map.put("dep_geo",true);
+          map.put("deportes",true);
+        }
+        if (cat.equals("Arte")){
+          map.put("hist_art",true);
+          map.put("arte",true);
+        }
         return new ModelAndView(map,"./views/category/randomCategory.mustache");
       }
       else{
@@ -170,7 +196,8 @@ public class App{
       Map map = new HashMap();
       String user_Answer = req.queryParams("question");   //Se obtiene la respuesta proporcionada por el usuario.
       Object q = req.queryParams("quest");
-      Question question = Question.findFirst("id = ?", Long.parseLong(q.toString()));
+      Long id_q = Long.parseLong(q.toString());
+      Question question = Question.findFirst("id = ?",id_q);
       
       Object id_O = (Object) req.session().attribute("user");
       String s = id_O.toString();
@@ -179,14 +206,22 @@ public class App{
 
       //Se registra que el usuario actual respondio esa pregunta.
       //question.add(actualUser);
+      QuestionsUsers qu = new QuestionsUsers(id,id_q);
       
       String id_G = req.queryParams("game_id");
       Long id_game = Long.parseLong(id_G);
       Game game = Game.findFirst("id = ?", id_game);
       game.incrementRound();
+      
+      Category c = question.getCategory();
+      Object id_Cat_o = c.getId();
+      Long id_cat = Long.parseLong((id_Cat_o.toString()));
+
+      CategoriesGames cg = new CategoriesGames(id_game,id_cat);
 
       if(user_Answer.equals((String)question.get("answer1"))){
         actualUser.updateProfile(true);
+        game.updateGame(true);
         Object correct_ans = req.session().attribute("correct_answer");
         Integer cant_ans = Integer.parseInt(correct_ans.toString());
         if(cant_ans>=3){
@@ -213,7 +248,7 @@ public class App{
       }
       else{
         actualUser.updateProfile(false);
-        
+        game.updateGame(false);
         if(game.getActualRound().compareTo(game.getTotalRounds())==0){          
           game.finalized();
           map.put("final",true);
@@ -244,6 +279,33 @@ public class App{
         Long id_Cat = Long.parseLong(idc);
         map.put("category_id",id_Cat);
         map.put("game_id",id_G);
+
+        String cat =(String) c.get("tCategory");
+        
+        if (cat.equals("Historia")){
+          map.put("hist_art",true);
+          map.put("historia",true);
+        }
+        if (cat.equals("Geografia")){
+          map.put("dep_geo",true);
+          map.put("geografia",true);
+        }
+        if (cat.equals("Ciencia")){
+          map.put("cie_ent",true);
+          map.put("ciencia",true);
+        }
+        if (cat.equals("Entretenimiento")){
+          map.put("cie_ent",true);
+          map.put("entretenimiento",true);
+        }
+        if (cat.equals("Deportes")){
+          map.put("dep_geo",true);
+          map.put("deportes",true);
+        }
+        if (cat.equals("Arte")){
+          map.put("hist_art",true);
+          map.put("arte",true);
+        }
         return new ModelAndView(map,"./views/category/randomCategory.mustache");
     }, new MustacheTemplateEngine());  
 
@@ -251,8 +313,13 @@ public class App{
     get("/finalizedGame", (req,res)->{
       Map map = new HashMap();
       Long id = getUserId(req.session().attribute("user"));
+      String id_g = req.queryParams("game_id");
+      Long game_id = Long.parseLong(id_g);
+      Game game = Game.findFirst("id = ?", game_id);
       User actualUser = User.findFirst("id =?",id);
       map.put("user",actualUser.get("username"));
+      map.put("Co_ans",game.get("questions_Correct"));
+      map.put("In_ans",game.get("questions_Incorrect"));
       return new ModelAndView(map, "./views/games/finalizedGame.mustache");
     }, new MustacheTemplateEngine());
 

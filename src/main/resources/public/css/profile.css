@@ -33,7 +33,7 @@ input[class="cancelar"]:hover{
 }
 div[class="caja"]{
 	width: 50%;
-	background: rgba(0,0,0,.3);
+	background: rgba(0,0,0,0);
 	margin: 40px;
 	border-radius: 20px;
 	position: relative;

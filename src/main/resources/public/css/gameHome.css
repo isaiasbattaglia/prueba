@@ -66,6 +66,7 @@ div[class=cajas]{
 div[class=lives]{
 	position: relative;
 		right: 30%;
+		top:5px;
 }
 div[class=level]{
 	position: relative;

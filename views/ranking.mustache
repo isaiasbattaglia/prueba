@@ -1,21 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="css/gameHome.css">
+<link rel="stylesheet" type="text/css" href="css/ranking.css">
 </head>
 <body>
-	<h4>Ranking de usuarios:</h4>
+	<table class="menu">
+		<tl>
+			<td>
+				<form action="/ranking" method="get">
+					<input class="ranking" type="submit" value="Ranking">
+				</form>
+			</td>
+			<td>
+				<form action="/profile" method="get">
+					<input class="profile" type="submit" value="Perfil">
+				</form>				
+			</td>
+			<td>
+				<form action="/logout" method="get">
+					<input class="logout" type="submit" value="Cerrar Sesion">
+				</form>					
+			</td>
+		</tl>
+	</table>
+
+	<div class="bloque">
+		<form action="/games" method="get">
+			<input class="cancelar" type="submit" value=" X ">
+		</form>
+		<h4>Top 10</h4>
 		<div class="bloque2">
-				<h4>ranking:</h4>
 				<ul>
 					{{#ranking}}
 					<div class="cajas">
 						<li> 
-							<h3>usuario: {{username}} | Nivel: {{level}}</h3> 
+							<h3> usuario: {{username}}  Nivel: {{level}} </h3> 
 						</li>
 					</div>
 					{{/ranking}}
 				</ul>
 		</div>
+		
+	</div>
 </body>
 </html>

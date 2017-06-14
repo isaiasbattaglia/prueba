@@ -10,13 +10,40 @@ body{
 	text-align:center;
 
 }
+div[class=bloque]{
+	margin:10px;
+}
 
-div[class="bloque"]{
-	background:rgba(255,255,255,.7);
+input[class="cancelar"]{
+	color:#fff;
+	font-size: 1em;
+	background: #BD1A1A;
+	border:none;
+	border-radius: 30px;
+	padding: 5px;
+	margin: 10px;
+	position: relative;
+		left:45%;
+}
+input[class="cancelar"]:hover{
+	color:#fff;
+	font-size: 1em;
+	background: #F21616;
+	border:none;
+	border-radius: 30px;
+	padding: 5px;
+	margin: 10px;
+	position: relative;
+		left:45%;
+}
+
+div[class="bloque2"]{
+	background:rgba(0,0,0,.3);
+	border-bottom-right-radius:30px;
+	border-bottom-left-radius: 30px;
 	width: 70%;
 	padding: 20px;
 	position: relative;
-		top:100px;
 		left:15%;
 
 }
@@ -42,21 +69,29 @@ input:hover{
 h1{
 	color:#000;
 	background:#fff; 
-	border-radius: 50px;
+	border-top-right-radius: 30px;
+	border-top-left-radius: 30px;
+	width: 70%;
 	font-family: "BP Diet";
-	padding: 5px;
+	font-size: 15px;
+	padding: 20px;
 	margin: 2px;
+	position:relative;
+		left: 15%;
 
 }
 
 h2{
 	text-shadow: 10px 5px 5px #000;
 	color:#fff;
-	background:#0B4C89; 
+	background:#585858; 
 	border-radius: 50px;
 	font-family: "BP Diet";
 	padding: 5px;
 	margin: 2px;
+	width: 70%;
+	position: relative;
+		left: 15%;
 
 }
 
