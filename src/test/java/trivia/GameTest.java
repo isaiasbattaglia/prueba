@@ -24,7 +24,8 @@ public class GameTest{
     Base.close();
   }
 
-	@Test
+
+	/*@Test
 	public void validateSubtractLive(){
 		User u = new User();
 		u.set("username","matias");
@@ -38,7 +39,7 @@ public class GameTest{
     System.out.println(u.get("lives"));
     game.saveIt();
 		assertEquals((((Integer)u.get("lives")).compareTo(new Integer(2)))==0,true);		
-	}  
+	}*/
 }
 
   /**

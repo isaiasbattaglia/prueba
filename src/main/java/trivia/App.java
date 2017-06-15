@@ -24,6 +24,11 @@ public class App{
       Base.close();
     });
 
+
+    //-----------------------------------------------------------------------------------------------------------------------
+    //Manejo del registro,login y logout del usuario
+    //-----------------------------------------------------------------------------------------------------------------------
+
     //Home del juego
     get("/", (req,res) -> {
       Map map = new HashMap();
@@ -40,7 +45,7 @@ public class App{
 
 
     /*Metodo que permite hacer el login de un usuario*/
-    post("/login", (req,res)->{
+    get("/login", (req,res)->{
       Map map = new HashMap();
       //Si el usuario ingresado es valido
       if(User.validUser(req.queryParams("nickname"),req.queryParams("password"))){
@@ -96,9 +101,6 @@ public class App{
         map.put("error","Contraseñas no coinciden");
         return new ModelAndView(map,"./views/users/new.mustache");
       }
-      //User user = User.create(dsasda);
-      //if  (user.isValid()) {
-      //}
       List<User> lst = User.where("username = ? or email = ? ", req.queryParams("nickname"), req.queryParams("Email"));
       User u;
       if(lst.size()==0)
@@ -107,7 +109,6 @@ public class App{
         User user = lst.get(0);
         String username = (String)user.get("username");
         if(username.equals(req.queryParams("username")))
-          //user.errors().get("email")
           map.put("error","El nombre de usuario ya esta registrado.");
         else
           map.put("error","Ya existe un usuario con ese email.");
@@ -127,6 +128,11 @@ public class App{
       }
       return new ModelAndView(map, "./views/home.mustache");
     },new MustacheTemplateEngine());
+
+
+  //-----------------------------------------------------------------------------------------------------------------------
+  //Manejo de la logica del juego, preguntas y respuestas, vistas de las mismas
+  //-----------------------------------------------------------------------------------------------------------------------
 
 
     /*Busca en la base de datos si el usuario es correcto, en caso de ser valido, crea una sesion para ese usuario
@@ -155,12 +161,12 @@ public class App{
       Object id_O = (Object) req.session().attribute("user");
       String s = id_O.toString();
       Long id = Long.parseLong(s);
-      User actualUser = User.findFirst("id = ?",id);  
+      User actualUser = User.findById(id);  
       //Si el usuario posee vidas para seguir jugando
       if ((Integer)actualUser.get("lives")>0){
         Game game = new Game(id); //Se crea un nuevo juego para ese usuario.
         //actualUser.setLives((Integer)actualUser.get("lives")-1);
-        Category c = game.getRandomCategory();    //Se obtiene una categoria aleatoria
+        Category c = (new Category()).randomCategory();
         String idc = (c.getId()).toString();      //Se obtiene el id de la categoria
         Long id_Cat = Long.parseLong(idc);        //Se obtiene el id de la categoria
         String idg = (game.getId()).toString();   //Se obtiene el id del juego en el cual se esta jugando
@@ -211,7 +217,7 @@ public class App{
     get("/questions", (req,res)->{
       String id_c = req.queryParams("category_id");
       Long id = Long.parseLong(id_c);
-      Category c = Category.findFirst("id = ?", id);
+      Category c = Category.findById(id);
       Question q = c.getQuestion();
       List<String> ls = q.randomAnswers();
       Map map = new HashMap();
@@ -238,23 +244,24 @@ public class App{
       Object q = req.queryParams("quest");
       Long id_q = Long.parseLong(q.toString());
       //Fin de la obtencion de la question
-      Question question = Question.findFirst("id = ?",id_q);
+      Question question = Question.findById(id_q);
 
       Object id_O = (Object) req.session().attribute("user");
       String s = id_O.toString();
       Long id = Long.parseLong(s);
-      User actualUser = User.findFirst("id =?",id);
+      User actualUser = User.findById(id);
 
       //Se registra que el usuario actual respondio esa pregunta.
       QuestionsUsers qu = new QuestionsUsers(id,id_q);
-      
+
       //Se obtiene el id del juego en cuestion.
       String id_G = req.queryParams("game_id");
       Long id_game = Long.parseLong(id_G);
       //FIn de la obtenecion del id del juego
-
-      Game game = Game.findFirst("id = ?", id_game);
+      Game game = Game.findById(id_game);
       game.incrementRound();  //Se incrementan las rondas del juego
+      
+      GamesQuestions gq = new GamesQuestions(id_q,id_game);   //Se vincula el game y la question.
 
       //Se obtiene la categoria de la pregunta y su correspondiente ID
       Category c = question.getCategory();
@@ -322,8 +329,8 @@ public class App{
       Map map = new HashMap();
       String id_G = req.queryParams("game_id");
       Long id_game = Long.parseLong(id_G);
-      Game game = Game.findFirst("id = ?", id_game);
-      Category c = game.getRandomCategory();
+      Game game = Game.findById(id_game);
+      Category c = (new Category()).randomCategory();
       map.put("category", c.get("tCategory"));
       String idc = (c.getId()).toString();
       Long id_Cat = Long.parseLong(idc);
@@ -365,8 +372,8 @@ public class App{
       Long id = getUserId(req.session().attribute("user"));
       String id_g = req.queryParams("game_id");
       Long game_id = Long.parseLong(id_g);
-      Game game = Game.findFirst("id = ?", game_id);
-      User actualUser = User.findFirst("id =?",id);
+      Game game = Game.findById(game_id);
+      User actualUser = User.findById(id);
       map.put("user",actualUser.get("username"));
       map.put("Co_ans",game.get("questions_Correct"));
       map.put("In_ans",game.get("questions_Incorrect"));
@@ -382,7 +389,7 @@ public class App{
     get("/profile", (req,res)->{
       Map data = new HashMap();
       Long id = getUserId(req.session().attribute("user"));
-      User actualUser = User.findFirst("id = ?",id);
+      User actualUser = User.findById(id);
       data.put("lifes",actualUser.get("lives"));
       data.put("Total_Points",actualUser.get("total_points"));
       data.put("correct_questions",actualUser.get("correct_questions"));

@@ -16,6 +16,7 @@ public class Game extends Model {
   *@Param user_id usuario que crea el juego
   **/
   public Game(Long user_id){
+    super();
   	set("round",0);
     set("total_rounds",5);
   	set("user_id",user_id);
@@ -26,14 +27,6 @@ public class Game extends Model {
     User user = this.parent(User.class);
     user.set("lives",((Integer)user.get("lives"))-1).saveIt();
   }
-
-  /**
-  *Metodo que obtiene una categoria aleatoria
-  *@Return categoria aleatoria
-  **/
-  public Category getRandomCategory()
-  {return (new Category()).randomCategory();}
-
 
   /**
   *Metodo que permite rendirse durante una partida

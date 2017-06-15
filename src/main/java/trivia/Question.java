@@ -33,28 +33,8 @@ public class Question extends Model {
     set("category_id",id_C);
     saveIt();
 	}
-  /**
-  *Metodo que muestra las respuesta a una pregunta de forma aleatoria
-  **/
-  public void showRandomAnswer(){
-    System.out.println(this.get("answer1"));
-    System.out.println(this.get("answer2"));
-    System.out.println(this.get("answer3"));
-    System.out.println(this.get("answer4"));
-  }
 
-
-  public void showQuestion(){
-    Category cat = this.parent(Category.class);
-    System.out.println((String)cat.get("tCategory"));
-    System.out.println((String)this.get("description"));
-    showRandomAnswer();
-  }
-
-  public boolean validateAnswer(Integer numberOfAnswer){
-    return numberOfAnswer==1;
-  }
-
+  //Metodo que realiza una permutacion aleatoria de las respuestas de una pregunta.
   public List<String> randomAnswers(){
     List<String> arr = new ArrayList<String>();
     arr.add(0,(String)this.get("answer1"));
@@ -65,6 +45,7 @@ public class Question extends Model {
     return arr;
   }
 
+  //Obtiene la categoria(padre) de la pregunta.
   public Category getCategory(){
     Category c = this.parent(Category.class);
     return c;

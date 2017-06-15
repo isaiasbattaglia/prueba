@@ -60,15 +60,6 @@ public class User extends Model {
   public List<Game> getGame()
   {return this.getAll(Game.class); }
 
-  public boolean answerQuestion(Question question){
-    question.showQuestion();
-    if (question.validateAnswer(1)){
-      updateProfile(true);
-      return true;
-    }
-    updateProfile(false);
-    return false;
-  }
 
   public void updateProfile(boolean correctAnswer){
     this.set("total_questions",(Integer)this.get("total_questions")+1).saveIt();
