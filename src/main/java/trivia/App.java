@@ -51,17 +51,12 @@ public class App{
       if(User.validUser(req.queryParams("nickname"),req.queryParams("password"))){
         User currentUser = User.getUser(req.queryParams("nickname"),req.queryParams("password"));   //Buscamos el usuario de la persona que se acaba de loguear
         
-        /*Se obtiene el ID del usuario*/
-        Object id_O = currentUser.getId();
-        String s = id_O.toString();
-        Long id= Long.parseLong(s);
-        /*Fin de la obtencion del ID del usuario*/
+        Long id = Long.parseLong((currentUser.getId()).toString());
+
        if (req.session().attribute("user")!=null){    //Ya hay una sesion iniciada...
-        Object id_O_S = req.session().attribute("user");
-        String id_Se = id_O_S.toString();
-        Long id_sesion= Long.parseLong(id_Se);
-        //SI la sesion del usuario no es la misma del que quiere volver a ingresar
-        if(id_sesion.compareTo(id)!=0){
+        Long id_sesion = req.session().attribute("user");   //Obtenemos el id del usuario que estaba jugando
+        //SI la sesion del usuario no es la misma del que quiere ingresar
+        if(id_sesion.compareTo((Long)id)!=0){
           req.session(true);    //Se crea la sesion para el usuario.
           req.session().attribute("user", id);  //Se asocia esa sesion con el id del usuario en cuestion.
           req.session().attribute("correct_answer",0);
@@ -117,8 +112,6 @@ public class App{
       return new ModelAndView(map, "./views/home.mustache");    //Se registro con exito, se redirecciona al home, para loguarse.
     }, new MustacheTemplateEngine());
 
-
-
     //Metodo que permite realizar el logout de una sesion.
     get("/logout", (req,res)->{
       Map map = new HashMap();
@@ -139,13 +132,10 @@ public class App{
     * y muestra la vista de new game, en el caso de no ser correcto el usuario se redirecciona a la ventana login*/
     get("/games", (req,res) ->{
       Map map =new HashMap();
-      Object id_O = (Object) req.session().attribute("user");
-      String s = id_O.toString();
-      //String s = req.session().attribute("user");
-      Long id = Long.parseLong(s);
+      Long id = req.session().attribute("user");
       List<Game> games = Game.where("user_id = ? and state=?",id,"En_proceso");  //Se obtiene la lista de juegos que posee ese usuario.
       User actualUser = User.findById(id);    //Se busca el usuarii
-      games.size();       //Esto se lo hace para traer la lazylist
+      games.size(); //Esto se lo hace para traer la lazylist
       
       //Se colocan los atributos necesarios en el map.
       map.put("games", games);  
@@ -158,48 +148,34 @@ public class App{
     *Se crea un nuevo juego, si el usuario tiene vidas para hacerlo, caso contrario no se lo permite*/
     post("/newGame", (req,res)->{
       Map map = new HashMap();
-      Object id_O = (Object) req.session().attribute("user");
-      String s = id_O.toString();
-      Long id = Long.parseLong(s);
+      Long id = req.session().attribute("user");
       User actualUser = User.findById(id);  
+
       //Si el usuario posee vidas para seguir jugando
       if ((Integer)actualUser.get("lives")>0){
         Game game = new Game(id); //Se crea un nuevo juego para ese usuario.
         //actualUser.setLives((Integer)actualUser.get("lives")-1);
         Category c = (new Category()).randomCategory();
-        String idc = (c.getId()).toString();      //Se obtiene el id de la categoria
-        Long id_Cat = Long.parseLong(idc);        //Se obtiene el id de la categoria
-        String idg = (game.getId()).toString();   //Se obtiene el id del juego en el cual se esta jugando
+        Long idc = Long.parseLong((c.getId()).toString());      //Se obtiene el id de la categoria
+        Long idg = Long.parseLong((game.getId()).toString());   //Se obtiene el id del juego en el cual se esta jugando
         map.put("category", c.get("tCategory"));
-        map.put("category_id",id_Cat);
+        map.put("category_id",idc);
         map.put("game_id",idg);
 
         //Se colocan en un mapa la categoria que toco, para luego mostrar una vista personalizada con esa categoria.
         String cat =(String) c.get("tCategory");
-        if (cat.equals("Historia")){
-          map.put("hist_art",true);
+        if (cat.equals("Historia"))
           map.put("historia",true);
-        }
-        if (cat.equals("Geografia")){
-          map.put("dep_geo",true);
+        if (cat.equals("Geografia"))
           map.put("geografia",true);
-        }
-        if (cat.equals("Ciencia")){
-          map.put("cie_ent",true);
+        if (cat.equals("Ciencia"))
           map.put("ciencia",true);
-        }
-        if (cat.equals("Entretenimiento")){
-          map.put("cie_ent",true);
+        if (cat.equals("Entretenimiento"))
           map.put("entretenimiento",true);
-        }
-        if (cat.equals("Deportes")){
-          map.put("dep_geo",true);
+        if (cat.equals("Deportes"))
           map.put("deportes",true);
-        }
-        if (cat.equals("Arte")){
-          map.put("hist_art",true);
+        if (cat.equals("Arte"))
           map.put("arte",true);
-        }
         return new ModelAndView(map,"./views/category/randomCategory.mustache");
       }
       else{ //El usuario no posee mas vidas para continuar jugando.
@@ -216,8 +192,7 @@ public class App{
     /*Vista del juego cuando se pide una pregunta*/
     get("/questions", (req,res)->{
       String id_c = req.queryParams("category_id");
-      Long id = Long.parseLong(id_c);
-      Category c = Category.findById(id);
+      Category c = Category.findById(id_c);
       Question q = c.getQuestion();
       List<String> ls = q.randomAnswers();
       Map map = new HashMap();
@@ -240,24 +215,20 @@ public class App{
     post("/answer", (req,res)->{
       Map map = new HashMap();
       String user_Answer = req.queryParams("question");   //Se obtiene la respuesta proporcionada por el usuario.
-      //Se ovtiene la question realizada al usuario
-      Object q = req.queryParams("quest");
-      Long id_q = Long.parseLong(q.toString());
-      //Fin de la obtencion de la question
+      //Se obtiene el ID de la question realizada al usuario
+      String id_qq = req.queryParams("quest_id");
+      Long id_q = Long.parseLong(id_qq);
       Question question = Question.findById(id_q);
 
-      Object id_O = (Object) req.session().attribute("user");
-      String s = id_O.toString();
-      Long id = Long.parseLong(s);
-      User actualUser = User.findById(id);
+      Long id_u = req.session().attribute("user");
+      User actualUser = User.findById(id_u);
 
       //Se registra que el usuario actual respondio esa pregunta.
-      QuestionsUsers qu = new QuestionsUsers(id,id_q);
+      QuestionsUsers qu = new QuestionsUsers(id_u,id_q);
 
       //Se obtiene el id del juego en cuestion.
       String id_G = req.queryParams("game_id");
       Long id_game = Long.parseLong(id_G);
-      //FIn de la obtenecion del id del juego
       Game game = Game.findById(id_game);
       game.incrementRound();  //Se incrementan las rondas del juego
       
@@ -265,19 +236,13 @@ public class App{
 
       //Se obtiene la categoria de la pregunta y su correspondiente ID
       Category c = question.getCategory();
-      Object id_Cat_o = c.getId();
-      Long id_cat = Long.parseLong((id_Cat_o.toString()));
-
-
       //Si respondio correctamente...
       if(user_Answer.equals((String)question.get("answer1"))){
         actualUser.updateProfile(true);   //Se actuliza el perfil del usuario con una respuesta correcta.
         game.updateGame(true);            //Se actualiza el game con una respuesta correcta.
-
         //Se obtiene la cantidad de preguntas que respondio correctamente
-        Object correct_ans = req.session().attribute("correct_answer");
-        Integer cant_ans = Integer.parseInt(correct_ans.toString());
-        if(cant_ans>=3){    //Si son mayor o igual a 3
+        Integer correct_ans = req.session().attribute("correct_answer");
+        if(correct_ans>=3){    //Si son mayor o igual a 3
           //Le incrementamos una vida al usuario y reiniciamos las preguntas respondidas correctamente en esa sesion.
           actualUser.setLives((Integer)actualUser.get("lives")+1);
           req.session().removeAttribute("correct_answer");
@@ -286,7 +251,7 @@ public class App{
         else{
           //Incrementamos las respuestas correctas.
           req.session().removeAttribute("correct_answer");
-          req.session().attribute("correct_answer",cant_ans+1);
+          req.session().attribute("correct_answer",correct_ans+1);
         }
         //Si estamos en la ultima ronda
         if(game.getActualRound().compareTo(game.getTotalRounds())==0){          
@@ -327,51 +292,37 @@ public class App{
     get("/play", (req,res)->{
       Map map = new HashMap();
       String id_G = req.queryParams("game_id");
-      Long id_game = Long.parseLong(id_G);
-      Game game = Game.findById(id_game);
+      Game game = Game.findById(id_G);
       Category c = (new Category()).randomCategory();
+      Long idc = Long.parseLong((c.getId()).toString());
+      //Long id_Cat = Long.parseLong(idc);
       map.put("category", c.get("tCategory"));
-      String idc = (c.getId()).toString();
-      Long id_Cat = Long.parseLong(idc);
-      map.put("category_id",id_Cat);
+      map.put("category_id",idc);
       map.put("game_id",id_G);
       String cat =(String) c.get("tCategory");
 
       //Se coloca en un mapa la categoria que toco para mostrar una vista personalizada de la misma.
-      if (cat.equals("Historia")){
-        map.put("hist_art",true);
+      if (cat.equals("Historia"))
         map.put("historia",true);
-      }
-      if (cat.equals("Geografia")){
-        map.put("dep_geo",true);
+      if (cat.equals("Geografia"))
         map.put("geografia",true);
-      }
-      if (cat.equals("Ciencia")){
-        map.put("cie_ent",true);
+      if (cat.equals("Ciencia"))
         map.put("ciencia",true);
-      }
-      if (cat.equals("Entretenimiento")){
-        map.put("cie_ent",true);
+      if (cat.equals("Entretenimiento"))
         map.put("entretenimiento",true);
-      }
-      if (cat.equals("Deportes")){
-        map.put("dep_geo",true);
+      if (cat.equals("Deportes"))
         map.put("deportes",true);
-      }
-      if (cat.equals("Arte")){
-        map.put("hist_art",true);
+      if (cat.equals("Arte"))
         map.put("arte",true);
-      }
-        return new ModelAndView(map,"./views/category/randomCategory.mustache");
+      return new ModelAndView(map,"./views/category/randomCategory.mustache");
     }, new MustacheTemplateEngine());  
 
     //Metodo que devuelve la vista cuando se finaliza un juego
     get("/finalizedGame", (req,res)->{
       Map map = new HashMap();
-      Long id = getUserId(req.session().attribute("user"));
+      Long id = (req.session().attribute("user"));
       String id_g = req.queryParams("game_id");
-      Long game_id = Long.parseLong(id_g);
-      Game game = Game.findById(game_id);
+      Game game = Game.findById(id_g);
       User actualUser = User.findById(id);
       map.put("user",actualUser.get("username"));
       map.put("Co_ans",game.get("questions_Correct"));
@@ -387,7 +338,7 @@ public class App{
 
     get("/profile", (req,res)->{
       Map data = new HashMap();
-      Long id = getUserId(req.session().attribute("user"));
+      Long id = (req.session().attribute("user"));
       User actualUser = User.findById(id);
       data.put("lifes",actualUser.get("lives"));
       data.put("Total_Points",actualUser.get("total_points"));
@@ -408,11 +359,5 @@ public class App{
       info.put("ranking",top_10);
       return new ModelAndView(info,"./views/ranking.mustache");
     },new MustacheTemplateEngine());
-  }
-
-  private static Long getUserId(Object id_u){
-    Object id_O = id_u;
-    Long id = Long.parseLong(id_O.toString());
-    return id;
   }
 }

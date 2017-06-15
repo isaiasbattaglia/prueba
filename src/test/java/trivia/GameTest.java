@@ -139,14 +139,6 @@ public class GameTest{
     game.saveIt();    
   }
 
-  private void answerQuestion(boolean question, User user){
-    if (question)
-      user.updateProfile(true);
-    else
-      user.updateProfile(false);
-    user.saveIt();
-  } 
-
 
   /*@Test
   public void validateSubtractLive(){

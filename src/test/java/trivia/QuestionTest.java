@@ -24,28 +24,28 @@ public class QuestionTest{
     Base.close();
   }
 
-	 @Test
-	 public void validateNoEmptyDescription(){
-	   Question q = new Question();
-	   q.set("description","");
-	   q.set("answer1","hola");
-	   q.set("answer2","prueba");
-	   q.set("answer3","pruena");
-	   q.set("answer4","jaja");
-	   q.save();
-	   assertEquals(q.isValid(),false);
-	 }
+	@Test
+	public void validateNoEmptyDescription(){
+	  Question q = new Question();
+	  q.set("description","");
+	  q.set("answer1","hola");
+	  q.set("answer2","prueba");
+	  q.set("answer3","pruena");
+	  q.set("answer4","jaja");
+	  q.save();
+	  assertEquals(q.isValid(),false);
+	}
 
 
-	 @Test
-	 public void validatePresenceOfAnswers(){
-	   Question q = new Question();
-	   q.set("description","hola");
-	   q.set("answer1","hola");
-	   q.set("answer2","");
-	   q.set("answer3","pruena");
-	   q.set("answer4","jaja");
-	   q.save();
-	   assertEquals(q.isValid(),false);
-	 }	
+	@Test
+	public void validatePresenceOfAnswers(){
+	  Question q = new Question();
+		q.set("description","hola");
+	  q.set("answer1","hola");
+	  q.set("answer2","");
+	  q.set("answer3","pruena");
+	  q.set("answer4","jaja");
+	  q.save();
+	  assertEquals(q.isValid(),false);
+	}	
 }

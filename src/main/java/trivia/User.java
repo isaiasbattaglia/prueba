@@ -62,7 +62,10 @@ public class User extends Model {
   *@Return a Game
   **/
   public Game createGame()
-  {return new Game((Long)this.get("id"));}
+  {//set("lives",((Integer)get("lives"))-1).saveIt();
+  return new Game((Long)this.get("id"));
+
+  }
   
   /**
   *Metodo que retorna todos los juegos que inicio (this) un jugador.
