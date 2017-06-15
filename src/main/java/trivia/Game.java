@@ -5,6 +5,8 @@ import org.javalite.activejdbc.Model;
 public class Game extends Model {
   static{
     validatePresenceOf("user_id").message("Please, provide a user id");
+    validatePresenceOf("questions_Correct").message("Please, initialize questions_Correct");
+    validatePresenceOf("questions_Incorrect").message("Please, initialize questions_Incorrect");
   }
   
   /**
@@ -16,7 +18,9 @@ public class Game extends Model {
   *@Param user_id usuario que crea el juego
   **/
   public Game(Long user_id){
-    super();
+    validatePresenceOf("user_id").message("Please, provide a user id");
+    validatePresenceOf("questions_Correct").message("Please, initialize questions_Correct");
+    validatePresenceOf("questions_Incorrect").message("Please, initialize questions_Incorrect");
   	set("round",0);
     set("total_rounds",5);
   	set("user_id",user_id);

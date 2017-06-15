@@ -42,6 +42,7 @@ div[class="box"]{
 h1{
 	background: #000;
 	border-radius: 30px;
+	font-family: "Mikado";
 	padding: 10px;
 	margin: 10px;
 	width: 40%;
@@ -63,6 +64,7 @@ h2{
 input[class="jugar"]{
 	color:#fff;
 	background: #FF8000;
+	padding: 10px;
 	border:none;
 	border-radius: 30px;
 	padding: 5px;
@@ -72,9 +74,15 @@ input[class="jugar"]{
 input[class="jugar"]:hover{
 	color:#fff;
 	background: #FFBF00;
+	padding: 10px;
 	border:none;
 	border-radius: 30px;
 	padding: 5px;
 	margin: 10px;
 	font-size: 2em;
+}
+
+p{
+	font-family: "Mikado";
+	font-size: 20px;
 }

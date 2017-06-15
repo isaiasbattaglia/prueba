@@ -269,7 +269,6 @@ public class App{
       Long id_cat = Long.parseLong((id_Cat_o.toString()));
 
 
-      //CategoriesGames cg = new CategoriesGames(id_game,id_cat);
       //Si respondio correctamente...
       if(user_Answer.equals((String)question.get("answer1"))){
         actualUser.updateProfile(true);   //Se actuliza el perfil del usuario con una respuesta correcta.

@@ -11,7 +11,7 @@ body{
 
 }
 div[class=bloque]{
-	margin:10px;
+	margin:5px;
 }
 
 input[class="cancelar"]{
@@ -42,7 +42,7 @@ div[class="bloque2"]{
 	border-bottom-right-radius:30px;
 	border-bottom-left-radius: 30px;
 	width: 70%;
-	padding: 20px;
+	padding: 10px;
 	position: relative;
 		left:15%;
 
@@ -74,7 +74,7 @@ h1{
 	width: 70%;
 	font-family: "Mikado";
 	font-size: 15px;
-	padding: 20px;
+	padding: 10px;
 	margin: 2px;
 	position:relative;
 		left: 15%;
@@ -97,7 +97,5 @@ h2{
 
 img{
 	width: 50%;
-	position:relative;
-		top:100px;
 }
 

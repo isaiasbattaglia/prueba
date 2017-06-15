@@ -34,12 +34,22 @@ public class UserTest{
          user.set("password", "hola");
          user.set("email", "hola@gmail");
          user.set("lives", 3);
+         user.set("total_points",0);
+         user.set("correct_questions",0);
+         user.set("incorrect_questions",0);
+         user.set("total_questions",0);
+         user.set("level",0);
          user.saveIt();
          User user2 = new User();
          user2.set("username", "pepe");
          user2.set("password", "hola");
          user2.set("email", "hola@gmail.com");
          user2.set("lives", 3);
+         user2.set("total_points",0);
+         user2.set("correct_questions",0);
+         user2.set("incorrect_questions",0);
+         user2.set("total_questions",0);
+         user2.set("level",0);
          user2.save();
          assertEquals(user2.isValid(), false);
      }
@@ -51,12 +61,22 @@ public class UserTest{
          user.set("password", "hola");
          user.set("email", "hola@gmail.com");
          user.set("lives", 3);
+         user.set("total_points",0);
+         user.set("correct_questions",0);
+         user.set("incorrect_questions",0);
+         user.set("total_questions",0);
+         user.set("level",0);
          user.saveIt();
          User user2 = new User();
          user2.set("username", "hola2");
          user2.set("password", "hola");
          user2.set("email", "hola@gmail.com");
          user2.set("lives", 3);
+         user2.set("total_points",0);
+         user2.set("correct_questions",0);
+         user2.set("incorrect_questions",0);
+         user2.set("total_questions",0);
+         user2.set("level",0);
          user2.save();
          assertEquals(user2.isValid(), false);
      }
@@ -68,6 +88,11 @@ public class UserTest{
          user.set("password", "hola");
          user.set("email", "hola@gmail.com");
          user.set("lives", -3);
+         user.set("total_points",0);
+         user.set("correct_questions",0);
+         user.set("incorrect_questions",0);
+         user.set("total_questions",0);
+         user.set("level",0);
          user.saveIt();
          assertFalse( ((Integer)user.get("lives"))>=0);
      }
@@ -79,6 +104,10 @@ public class UserTest{
          user.set("email", "hola@gmail.com");
          user.set("lives", 3);
          user.set("total_points", -3);
+         user.set("correct_questions",0);
+         user.set("incorrect_questions",0);
+         user.set("total_questions",0);
+         user.set("level",0);
          user.saveIt();
          assertFalse( ((Integer)user.get("total_points"))>=0);
      }
@@ -91,6 +120,10 @@ public class UserTest{
          user.set("email", "hola@gmail.com");
          user.set("lives", 3);
          user.set("level", -3);
+         user.set("total_points", 0);
+         user.set("correct_questions",0);
+         user.set("incorrect_questions",0);
+         user.set("total_questions",0);
          user.saveIt();
          assertFalse( ((Integer)user.get("level"))>=0);
      }

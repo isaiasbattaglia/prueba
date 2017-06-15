@@ -11,7 +11,12 @@ public class User extends Model {
     validatePresenceOf("username").message("Please, provide your username");
     validatePresenceOf("password").message("Please, provide your password");
     validatePresenceOf("email").message("please, provide your email");
-    validatePresenceOf("lives").message("");
+    validatePresenceOf("lives").message("Initialize lives");
+    validatePresenceOf("total_points").message("Initialize total points");
+    validatePresenceOf("correct_questions").message("Initialize correct_questions");
+    validatePresenceOf("incorrect_questions").message("Initialize incorrect_questions");
+    validatePresenceOf("total_questions").message("Initialize total_questions");
+    validatePresenceOf("level").message("Initialize a level");
     validateWith(new UniquenessValidator("username")).message("This username is already taken.");
     validateWith(new UniquenessValidator("email")).message("This username is already taken.");
   }
@@ -28,6 +33,12 @@ public class User extends Model {
     validatePresenceOf("username").message("Please, provide your username");
     validatePresenceOf("password").message("Please, provide your username");
     validatePresenceOf("email").message("please, provide your email");
+    validatePresenceOf("lives").message("Initialize lives");
+    validatePresenceOf("total_points").message("Initialize total points");
+    validatePresenceOf("correct_questions").message("Initialize correct_questions");
+    validatePresenceOf("incorrect_questions").message("Initialize incorrect_questions");
+    validatePresenceOf("total_questions").message("Initialize total_questions");
+    validatePresenceOf("level").message("Initialize a level");
     set("username", username);
     set("email",email);
     set("password",password);

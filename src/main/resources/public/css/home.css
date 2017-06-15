@@ -21,7 +21,7 @@ body{
 h2{	
 	text-align: center;	
 	font-family: "Mikado";
-	font-size: 2em;
+	font-size: 50px;
 	color: #fff;
 	text-shadow: 1px 2px 10px #000;
 }
@@ -34,10 +34,10 @@ h3 i{
 
 
 .b1{
-	background-color: #00365F;
+	background-color: #01A9DB;
 	border: none;
 	float: left;
-	color:#ccc;
+	color:#fff;
 	padding: 15px;
 	position: relative;
 		right: -10px;
@@ -83,6 +83,7 @@ form[class="login"]{
 	width:  40%;
 	padding: 5px;
 	color:#fff;
+	border-radius: 20px;
 	position: relative;
 		left: 30%;
 }
